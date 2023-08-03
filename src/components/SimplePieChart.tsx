@@ -15,15 +15,20 @@ interface SimplePieChartProps {
     label?: string;
 }
 
-const colourPalette = ['#ea5545', '#f46a9b', '#ef9b20', '#edbf33', '#ede15b', '#bdcf32', '#87bc45', '#27aeef', '#b33dc6'];
+const colourPalette = [
+	'RGB(244, 67, 54)', 'RGB(232, 30, 99)', 'RGB(156, 39, 176)', 'RGB(103, 58, 183)', 'RGB(63, 81, 181)',
+	'RGB(33, 150, 243)', 'RGB(3, 169, 244)', 'RGB(0, 188, 212)', 'RGB(0, 150, 136)', 'RGB(76, 175, 80)',
+	'RGB(139, 195, 74)', 'RGB(205, 220, 57)','RGB(255, 235, 59)', 'RGB(255, 193, 7)', 'RGB(255, 152, 0)',
+	'RGB(255, 87, 34)', 'RGB(121, 85, 72)', 'RGB(158, 158, 158)', 'RGB(96, 125, 139)', 'RGB(0, 0, 0)'
+];
+
 function SimplePieChart(props: SimplePieChartProps) {
 	const {dataSet, path, label} = props;
 	const processedData: Map<string, number> = getProcessedData(dataSet, path);
 	// Handle a large variety of data values
-	if (Array.from (processedData.values()).length > 9) {
+	if (Array.from (processedData.values()).length > 20) {
 		return (
-			<GenericPieChart dataSet={dataSet} path={path} label={label} selectionMethod={'dropdown'}
-			/>
+			<GenericPieChart dataSet={dataSet} path={path} label={label} selectionMethod={'dropdown'}/>
 		);
 	}
 	const pieChartData = {
