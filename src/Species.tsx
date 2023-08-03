@@ -21,9 +21,12 @@ const Species = () => {
 					<GenericPieChart label={'Species Designation Breakdown'} dataSet={speciesData} path={['designation']} selectionMethod={'buttons'}/>
 				</Stack>
 				<Stack useFlexGap spacing={1} direction={'row'}>
-					{/*<SimplePieChart label={'Species Language Breakdown'} dataSet={speciesData} path={['language']} />*/}
-					<SimplePieChart label={'Species Classification Breakdown'} dataSet={speciesData} path={['classification']} />
-					<SimplePieChart label={'Species Designation Breakdown'} dataSet={speciesData} path={['designation']} />
+					<SimplePieChart label={'Eye Colors Breakdown'} dataSet={speciesData} path={['eye_colors']} />
+					<SimplePieChart label={'Classification Breakdown'} dataSet={speciesData} path={['classification']} />
+					<SimplePieChart label={'Designation Breakdown'} dataSet={speciesData} path={['designation']} />
+				</Stack>
+				<Stack>
+					<SimplePieChart label={'Skin Colors Breakdown'} dataSet={speciesData} path={['skin_colors']}  multiSelect/>
 				</Stack>
 				<Container>
 					<Paper sx={{width: '90%', border: '5px dashed aquamarine', marginX: 'auto'}}>
