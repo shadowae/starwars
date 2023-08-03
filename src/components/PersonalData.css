@@ -1,0 +1,42 @@
+.name {
+
+}
+
+.left-side {
+    min-width: 30%;
+    padding: 15px 0 15px 15px;
+}
+
+.avatar {
+    display: flex;
+}
+
+.person-image {
+    padding-right: 100px;
+    align-self: start;
+}
+
+.section-header {
+    text-align: start;
+    font-size: 35px;
+    font-weight: 800;
+    color: #FFA789;
+}
+
+.info {
+    display: flex;
+    margin-bottom: 5px; /* Add spacing between info sections */
+    font-size: 20px
+}
+
+.label {
+    min-width: 25%;
+    padding-right: 5%;
+    text-align: start;
+    font-weight: bold; /* Optional: Make the label text bold */
+}
+
+.sw-movie-image {
+    border-radius: 30px;
+}
+
