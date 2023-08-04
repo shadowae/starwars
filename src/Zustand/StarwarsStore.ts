@@ -6,10 +6,16 @@ import PeopleDemoData from '../mock/PeopleDemoData';
 import {fetchAllPeopleData} from '../API/getPeople';
 import PeopleType from '../types/PeopleType';
 import FilmsData from '../mock/FilmsData';
+import {fetchAllVehicleData} from '../API/getVehicles';
+import VehicleType from '../types/VehicleType';
+import FilmType from '../types/FilmType';
 
 interface StarwarsState {
     species: SpeciesType[],
-    people: PeopleType[]
+    people: PeopleType[],
+	films: FilmType[],
+	vehicle: VehicleType[],
+	fetchV: () => void,
 }
 
 const useStarwarsStore = create<StarwarsState>()(
@@ -18,11 +24,16 @@ const useStarwarsStore = create<StarwarsState>()(
 			(set) => ({
 				species: DataSanitise,
 				people: PeopleDemoData,
+				films: FilmsData,
+				vehicle: [],
+				fetchV: async () => {
+					const response = await fetchAllVehicleData();
+					set({ vehicle: response });
+				},
 				fetchPeople: async () => {
 					const response = await fetchAllPeopleData();
 					set({ people: await response });
 				},
-				films: FilmsData,
 			}),
 			{
 				name: 'starwars-storage',

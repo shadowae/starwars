@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Accordion from '@mui/material/Accordion';
 import {AccordionDetails, AccordionSummary, Container, Typography} from '@mui/material';
 import useStarwarsStore from './Zustand/StarwarsStore';
@@ -7,8 +7,11 @@ import PeopleType from './types/PeopleType';
 import './People.css';
 
 const People = () => {
-	const peopleData = useStarwarsStore(state => state.people);
- 
+	const { peopleData, fetchV } = useStarwarsStore(
+		(state) => ({ peopleData: state.people, fetchV: state.fetchV }),);
+	useEffect(() => {
+		fetchV();
+	}, [fetchV]);
 	return (
 		<Container sx={{backgroundColor: '#E5E5E5'}} maxWidth="xl">
 			<Typography variant={'h4'}>

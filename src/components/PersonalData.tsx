@@ -6,6 +6,9 @@ import genderIcons from './img/gender';
 import peopleImage from './img/people';
 import fileImages from './img/films';
 import {Avatar, Box, Card, Divider, Paper, Typography} from '@mui/material';
+import useStarwarsStore from '../Zustand/StarwarsStore';
+import VehicleType from '../types/VehicleType';
+import FilmType from '../types/FilmType';
 
 // Use the defined type for the data prop
 interface PropsType {
@@ -13,6 +16,7 @@ interface PropsType {
 }
 
 const PersonalData: React.FC<PropsType> = ({ person }) => {
+	const {vehiclesData, filmsData} = useStarwarsStore((state) => ({vehiclesData: state.vehicle, filmsData: state.films}),);
 	const {defaultImage} = peopleImage;
 	const {
 		name,
@@ -24,7 +28,7 @@ const PersonalData: React.FC<PropsType> = ({ person }) => {
 		birth_year,
 		gender,
 	} = person;
-    
+ 
 	const getGenderIcon = (gender: string) => {
 		const {maleIcon, femaleIcon, agenderIcon} = genderIcons;
 		if (gender === 'male') {
@@ -53,43 +57,48 @@ const PersonalData: React.FC<PropsType> = ({ person }) => {
 			);
 		}
 	};
-    
-	const getMovies = (movies: string[]) => {
+	const getFilmSrc = (movieUrl: string): string => {
 		const { SWmovie1, SWmovie2, SWmovie3, SWmovie4, SWmovie5, SWmovie6, SWmovie7, SWmovie8, SWmovie9 } = fileImages;
-		const getMovieSrc = (movieUrl: string): string => {
-			console.log(movieUrl.slice(-2,-1));
-			switch (parseInt(movieUrl.slice(-2,-1))) {
-			case 1:
-				return SWmovie1;
-			case 2:
-				return SWmovie2;
-			case 3:
-				return SWmovie3;
-			case 4:
-				return SWmovie4;
-			case 5:
-				return SWmovie5;
-			case 6:
-				return SWmovie6;
-			case 7:
-				return SWmovie7;
-			case 8:
-				return SWmovie8;
-			case 9:
-				return SWmovie9;
-			default:
-				return '';
-			}
-		};
-        
+		
+		switch (parseInt(movieUrl.slice(-2,-1))) {
+		case 1:
+			return SWmovie1;
+		case 2:
+			return SWmovie2;
+		case 3:
+			return SWmovie3;
+		case 4:
+			return SWmovie4;
+		case 5:
+			return SWmovie5;
+		case 6:
+			return SWmovie6;
+		case 7:
+			return SWmovie7;
+		case 8:
+			return SWmovie8;
+		case 9:
+			return SWmovie9;
+		default:
+			return '';
+		}
+	};
+	
+	const renderSliderContent = (contentList: VehicleType[] | FilmType[], srcFunction?: Function) => {
 		return (
 			<Stack direction="row" spacing={2} sx={{ minWidth: 0,overflowX: 'scroll', borderColor: 'black' }}>
-				{movies.map((movie, index) => {
+				{contentList.map((content, index) => {
+					let displayName;
+					if ('title' in content) {
+						displayName = `Episode ${content.episode_id}: ${content.title}`;
+					} else {
+						displayName = content.name;
+					}
 					return (
 						<div className="movie" key={index}>
-							<img src={getMovieSrc(movie)} alt={'SW Movie 1'} className={'sw-movie-image'} width={50}/>
+							{srcFunction &&<img src={srcFunction(content.url)} alt={'SW Movie 1'} className={'sw-movie-image'} width={50}/>}
 							<div className="movie-name">
-								{movie}
+								{displayName}
 							</div>
 						</div>
 					);
@@ -97,7 +106,19 @@ const PersonalData: React.FC<PropsType> = ({ person }) => {
 			</Stack>
 		);
 	};
-    
+ 
+	const getVehicleList = (personObjectList: string[]) => {
+		return personObjectList.flatMap((object) => {
+			return vehiclesData.filter((vehicle) => vehicle.url === object);
+		});
+	};
+	
+	const getFilmList = (personObjectList: string[]) => {
+		return personObjectList.flatMap((object) => {
+			return filmsData.filter((film) => film.url === object);
+		}).sort((a,b) =>  a.episode_id - b.episode_id);
+	};
+	
 	return (
 		<Paper elevation={24}>
 			<Stack
@@ -157,10 +178,17 @@ const PersonalData: React.FC<PropsType> = ({ person }) => {
 						</Stack>
 					</Box>
 				</Box>
-				<Box>
-					<p className={'section-header'}>Movies Featured In</p>
-					{getMovies(person.films)}
-				</Box>
+				<Stack padding={ '15px' } sx={{ overflowX: 'scroll', maxWidth: '90%', paddingRight: '15px'}}>
+					<Box>
+						<p className={'section-header'}>Movies Featured In</p>
+						{renderSliderContent(getFilmList(person.films), getFilmSrc)}
+					</Box>
+					
+					{person.vehicles.length > 0 && <Box>
+						<p className={'section-header'}>Vehicles Used</p>
+						{renderSliderContent(getVehicleList(person.vehicles))}
+					</Box>}
+				</Stack>
 			</Stack>
 		</Paper>
 	);
