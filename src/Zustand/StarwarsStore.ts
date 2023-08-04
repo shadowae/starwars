@@ -9,13 +9,17 @@ import FilmsData from '../mock/FilmsData';
 import {fetchAllVehicleData} from '../API/getVehicles';
 import VehicleType from '../types/VehicleType';
 import FilmType from '../types/FilmType';
+import {fetchAllStarshipData} from '../API/getStarships';
+import StarshipType from '../types/StarshipType';
 
 interface StarwarsState {
     species: SpeciesType[],
     people: PeopleType[],
 	films: FilmType[],
 	vehicle: VehicleType[],
-	fetchV: () => void,
+	fetchVehicle: () => void,
+	starship: StarshipType[],
+	fetchStarship: () => void,
 }
 
 const useStarwarsStore = create<StarwarsState>()(
@@ -26,13 +30,18 @@ const useStarwarsStore = create<StarwarsState>()(
 				people: PeopleDemoData,
 				films: FilmsData,
 				vehicle: [],
-				fetchV: async () => {
+				starship: [],
+				fetchVehicle: async () => {
 					const response = await fetchAllVehicleData();
 					set({ vehicle: response });
 				},
+				fetchStarship: async () => {
+					const response = await fetchAllStarshipData();
+					set({ starship: response });
+				},
 				fetchPeople: async () => {
 					const response = await fetchAllPeopleData();
-					set({ people: await response });
+					set({ people: response });
 				},
 			}),
 			{

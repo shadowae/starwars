@@ -9,6 +9,7 @@ import {Avatar, Box, Card, Divider, Paper, Typography} from '@mui/material';
 import useStarwarsStore from '../Zustand/StarwarsStore';
 import VehicleType from '../types/VehicleType';
 import FilmType from '../types/FilmType';
+import StarshipType from '../types/StarshipType';
 
 // Use the defined type for the data prop
 interface PropsType {
@@ -16,7 +17,7 @@ interface PropsType {
 }
 
 const PersonalData: React.FC<PropsType> = ({ person }) => {
-	const {vehiclesData, filmsData} = useStarwarsStore((state) => ({vehiclesData: state.vehicle, filmsData: state.films}),);
+	const {vehiclesData, filmsData, starshipData} = useStarwarsStore((state) => ({vehiclesData: state.vehicle, filmsData: state.films, starshipData: state.starship}),);
 	const {defaultImage} = peopleImage;
 	const {
 		name,
@@ -84,7 +85,7 @@ const PersonalData: React.FC<PropsType> = ({ person }) => {
 		}
 	};
 	
-	const renderSliderContent = (contentList: VehicleType[] | FilmType[], srcFunction?: Function) => {
+	const renderSliderContent = (contentList: VehicleType[] | FilmType[] | StarshipType[], srcFunction?: Function) => {
 		return (
 			<Stack direction="row" spacing={2} sx={{ minWidth: 0,overflowX: 'scroll', borderColor: 'black' }}>
 				{contentList.map((content, index) => {
@@ -106,7 +107,13 @@ const PersonalData: React.FC<PropsType> = ({ person }) => {
 			</Stack>
 		);
 	};
- 
+	
+	const getStarshipList = (personObjectList: string[]) => {
+		return personObjectList.flatMap((object) => {
+			return starshipData.filter((starship) => starship.url === object);
+		});
+	};
+	
 	const getVehicleList = (personObjectList: string[]) => {
 		return personObjectList.flatMap((object) => {
 			return vehiclesData.filter((vehicle) => vehicle.url === object);
@@ -187,6 +194,11 @@ const PersonalData: React.FC<PropsType> = ({ person }) => {
 					{person.vehicles.length > 0 && <Box>
 						<p className={'section-header'}>Vehicles Used</p>
 						{renderSliderContent(getVehicleList(person.vehicles))}
+					</Box>}
+					
+					{person.starships.length > 0 && <Box>
+						<p className={'section-header'}>Starships Used</p>
+						{renderSliderContent(getStarshipList(person.starships))}
 					</Box>}
 				</Stack>
 			</Stack>

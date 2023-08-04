@@ -7,11 +7,12 @@ import PeopleType from './types/PeopleType';
 import './People.css';
 
 const People = () => {
-	const { peopleData, fetchV } = useStarwarsStore(
-		(state) => ({ peopleData: state.people, fetchV: state.fetchV }),);
+	const { peopleData, fetchVehicle, fetchStarship } = useStarwarsStore(
+		(state) => ({ peopleData: state.people, fetchVehicle: state.fetchVehicle, fetchStarship: state.fetchStarship }),);
 	useEffect(() => {
-		fetchV();
-	}, [fetchV]);
+		fetchVehicle();
+		fetchStarship();
+	}, [fetchVehicle, fetchStarship]);
 	return (
 		<Container sx={{backgroundColor: '#E5E5E5'}} maxWidth="xl">
 			<Typography variant={'h4'}>
