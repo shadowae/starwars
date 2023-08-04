@@ -1,7 +1,7 @@
-import DemoData from '../mock/DemoData';
+import SpeciesData from '../mock/SpeciesData';
 import {isNullOrUndef} from 'chart.js/helpers';
 
-const DataSanitise = DemoData.map((item) => {
+const DataSanitise = SpeciesData.map((item) => {
 	const updatedData = {...item};
 	// swap out average_height parameter in item to 0 if NaN
 	if (isNaN(parseInt(item.average_height))) {
@@ -11,7 +11,7 @@ const DataSanitise = DemoData.map((item) => {
 	if (item.language === 'Galatic Basic' || item.language === 'galactic basic' || item.language === 'Galactic basic') {
 		updatedData.language = 'Galactic Basic';
 	}
-    
+ 
 	if(isNullOrUndef(item.homeworld)) {
 		updatedData.homeworld = '';
 	}
@@ -20,7 +20,7 @@ const DataSanitise = DemoData.map((item) => {
 	if(item.classification === 'mammals') {
 		updatedData.classification = 'mammal';
 	}
-    
+ 
 
 	return updatedData;
 });

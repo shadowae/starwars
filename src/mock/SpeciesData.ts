@@ -1,4 +1,4 @@
-const DemoData = [
+const SpeciesData = [
 	{
 		'name': 'Human',
 		'classification': 'mammal',
@@ -826,4 +826,4 @@ const DemoData = [
 		'url': 'https://swapi.dev/api/species/37/'
 	}
 ];
-export default DemoData;
+export default SpeciesData;
