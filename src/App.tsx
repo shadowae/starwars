@@ -19,6 +19,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import CategoryIcon from '@mui/icons-material/Category';
+import StarshipPagination from './StarshipPagination';
 interface ListItemLinkProps {
     icon?: React.ReactElement;
     primary: string;
@@ -32,10 +33,10 @@ export default function App() {
 	) {
 		return <RouterLink ref={ref} {...itemProps} role={undefined} />;
 	});
-    
+ 
 	const ListItemLink = (props: ListItemLinkProps) =>{
 		const { icon, primary, to } = props;
-        
+  
 		return (
 			<li>
 				<ListItemButton onClick={() => setMenuOpen(!menuOpen)} component={Link} to={to} selected={window.location.pathname === to}>
@@ -80,6 +81,7 @@ export default function App() {
 											<ListItemLink to="/" primary="Home" icon={<HomeIcon />} />
 											<ListItemLink to="/species" primary="Species" icon={<CategoryIcon />} />
 											<ListItemLink to="/people" primary="People" icon={<PeopleIcon />} />
+											<ListItemLink to="/starship" primary="Starship" icon={<PeopleIcon />} />
 										</List>
 									</Box>
 								</Drawer>
@@ -87,11 +89,12 @@ export default function App() {
 						</AppBar>
 					</Box>
 				</nav>
-                
+    
 				{/* Use 'Routes' to wrap multiple 'Route' components */}
 				<Routes>
 					<Route path="/species" element={<Species />} />
 					<Route path="/people" element={<People />} />
+					<Route path="/starship" element={<StarshipPagination />} />
 					<Route path="/" element={<Home />} />
 				</Routes>
 			</div>
