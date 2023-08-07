@@ -21,6 +21,7 @@ const StarshipSlice: StateCreator<StarwarsState&StarshipSliceType, [['zustand/de
 	fetchStarshipApi: async () => {
 		const response = await axios.get('https://swapi.dev/api/starships');
 		set({
+			starshipPage: 1,
 			starshipPagination: response.data.results,
 			starshipNextPage: response.data.next,
 			starshipPrevPage: response.data.previous,
