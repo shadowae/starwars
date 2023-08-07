@@ -11,7 +11,7 @@ const Species = () => {
 	
 	return (
 		<Container sx={{backgroundColor: '#E5E5E5'}} maxWidth="xl">
-			<Stack spacing={3}>
+			<Stack spacing={3} paddingY={'25px'}>
 				<Typography variant={'h4'}>
                     Star Wars - Species
 				</Typography>

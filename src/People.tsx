@@ -18,7 +18,7 @@ const People = () => {
 	}, [fetchVehicle, fetchStarship]);
 	return (
 		<Container sx={{backgroundColor: '#E5E5E5'}} maxWidth="xl">
-			<Stack spacing={3}>
+			<Stack spacing={3} paddingY={'25px'}>
 				<Typography variant={'h4'}>
 					Star Wars - People
 				</Typography>
@@ -29,8 +29,8 @@ const People = () => {
 				<SimplePieChart label={'Eye Color Breakdown'} dataSet={peopleData} path={['eye_color']}/>
 				<SimplePieChart label={'Skin Color Breakdown'} dataSet={peopleData} path={['skin_color']}/>
 			</Stack>
-			<Container>
-				<Paper sx={{width: '90%', border: '5px dashed aquamarine', marginX: 'auto'}}>
+			<Container sx={{marginBottom: '15px'}}>
+				<Paper sx={{width: '90%', border: '2px dashed aquamarine', marginX: 'auto', }}>
 					<SimpleBarChart dataSet={peopleData} dataPoint={['height', 'mass']}/>
 				</Paper>
 			</Container>
