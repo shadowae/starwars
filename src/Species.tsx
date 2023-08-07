@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Paper, Typography} from '@mui/material';
 import Stack from '@mui/material/Stack';
-import {SpeciesBarChart} from './SpeciesBarChart';
+import {SpeciesBarChart} from './components/SpeciesBarChart';
 import './Species.css';
 import GenericPieChart from './components/GenericPieChart';
 import useStarwarsStore from './Zustand/StarwarsStore';

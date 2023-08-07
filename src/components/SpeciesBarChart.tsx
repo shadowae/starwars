@@ -9,7 +9,7 @@ import {
 	Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import SpeciesType from './types/SpeciesType';
+import SpeciesType from '../types/SpeciesType';
 
 interface GenericBarChartProps {
     dataSet: SpeciesType[];
