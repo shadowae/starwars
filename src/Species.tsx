@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Paper, Typography} from '@mui/material';
 import Stack from '@mui/material/Stack';
-import {SpeciesBarChart} from './components/SpeciesBarChart';
+import {SimpleBarChart} from './components/SimpleBarChart';
 import './Species.css';
 import GenericPieChart from './components/GenericPieChart';
 import useStarwarsStore from './Zustand/StarwarsStore';
@@ -30,7 +30,7 @@ const Species = () => {
 				</Stack>
 				<Container>
 					<Paper sx={{width: '90%', border: '5px dashed aquamarine', marginX: 'auto'}}>
-						<SpeciesBarChart dataSet={speciesData}/>
+						<SimpleBarChart title={'Starwars Species Chart'} dataSet={speciesData} dataPoint={['average_height', 'average_lifespan']}/>
 					</Paper>
 				</Container>
 			</Stack>
